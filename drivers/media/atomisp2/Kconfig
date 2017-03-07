@@ -1,0 +1,19 @@
+config VIDEO_ATOMISP
+	tristate "Intel Atom Image Signal Processor CSS2.0 Driver"
+	depends on MEDIA_SUPPORT && VIDEO_V4L2 && MEDIA_CAMERA_SUPPORT
+	default m
+	select MEDIA_CONTROLLER
+	select VIDEO_V4L2_SUBDEV_API
+	select VIDEO_MT9M114
+	select VIDEO_OV5640
+	select VIDEOBUF2_CORE
+	select DMA_SHARED_BUFFER
+	select VIDEOBUF2_MEMOPS
+	select VIDEOBUF2_DMA_CONTIG
+	select PM_RUNTIME
+
+	---help---
+	  Say Y here if your platform support camera imaging subsystem on
+	  the Intel Atom SoC platform.
+	  To compile this driver as a module, choose M here: the
+	  module will be called atomisp.

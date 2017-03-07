@@ -15,6 +15,26 @@
 
 #include <media/videobuf2-v4l2.h>
 #include <linux/dma-mapping.h>
+struct vb2_dc_buf {
+	struct device			*dev;
+	void				*vaddr;
+	unsigned long			size;
+	dma_addr_t			dma_addr;
+	enum dma_data_direction		dma_dir;
+	struct sg_table			*dma_sgt;
+
+	/* MMAP related */
+	struct vb2_vmarea_handler	handler;
+	atomic_t			refcount;
+	struct sg_table			*sgt_base;
+
+	/* USERPTR related */
+	struct vm_area_struct		*vma;
+
+	/* DMABUF related */
+	struct dma_buf_attachment	*db_attach;
+};
+
 
 static inline dma_addr_t
 vb2_dma_contig_plane_dma_addr(struct vb2_buffer *vb, unsigned int plane_no)

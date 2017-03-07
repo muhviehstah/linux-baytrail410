@@ -676,6 +676,20 @@ config VIDEO_S5C73M3
 	  This is a V4L2 sensor-level driver for Samsung S5C73M3
 	  8 Mpixel camera.
 
+config VIDEO_MT9M114
+	tristate "Aptina MT9M114 sensor support"
+	depends on VIDEO_ATOMISP
+	default m
+	---help---
+	  Aptina MT9M114 sensor for ATOMISP
+
+config VIDEO_OV5640
+	tristate "Omnivision OV5640 sensor support"
+	depends on VIDEO_ATOMISP
+	default m
+	---help---
+	  Omnivision OV5640 sensor for ATOMISP
+
 comment "Flash devices"
 
 config VIDEO_ADP1653

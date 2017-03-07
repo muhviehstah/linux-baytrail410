@@ -29,9 +29,6 @@ endif
 obj-$(CONFIG_VIDEO_DEV) += v4l2-core/
 obj-$(CONFIG_DVB_CORE)  += dvb-core/
 
-# Atomisp driver
-obj-$(CONFIG_VIDEO_ATOMISP) += atomisp2/
-
 # There are both core and drivers at RC subtree - merge before drivers
 obj-y += rc/
 

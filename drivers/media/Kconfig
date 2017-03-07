@@ -20,14 +20,10 @@ comment "Multimedia core support"
 #
 config MEDIA_CAMERA_SUPPORT
 	bool "Cameras/video grabbers support"
-	select X86_MRFLD
 	---help---
 	  Enable support for webcams and video grabbers.
 
 	  Say Y when you have a webcam or a video capture grabber board.
-
-config X86_MRFLD
-	tristate
 
 config MEDIA_ANALOG_TV_SUPPORT
 	bool "Analog TV support"
@@ -235,7 +231,6 @@ config MEDIA_ATTACH
 	depends on MODULES
 	default MODULES
 
-source "drivers/media/atomisp2/Kconfig"
 source "drivers/media/i2c/Kconfig"
 source "drivers/media/spi/Kconfig"
 source "drivers/media/tuners/Kconfig"

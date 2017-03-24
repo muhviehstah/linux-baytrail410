@@ -1254,34 +1254,6 @@ static void bxt_idle_state_table_update(void)
 
 }
 /*
- * byt_idle_state_table_update(void)
- *
- * On BYT, we have errata VLP52 and disable C6.
- * https://bugzilla.kernel.org/show_bug.cgi?id=109051A
- * http://www.intel.com/content/dam/www/public/us/en/documents/specification-updates/pentium-n3520-j2850-celeron-n2920-n2820-n2815-n2806-j1850-j1750-spec-update.pdf
- * VLP52 EOI Transactions May Not be Sent if Software Enters Core C6 During an Interrupt Service Routine.
-
-Problem:
-If core C6 is entered after the start of an interrupt service routine but before a write
-to the APIC EOI (End of Interrupt) register, and the core is woken up by an event
-other than a fixed interrupt source the core may drop the EOI transaction the next
-time APIC EOI register is written and further interrupts from the same or lower
-priority level will be blocked.
-
-Implication:
-EOI transactions may be lost and interrupts may be blocked when core C6 is used
-during interrupt service routines.
-
-Workaround:
-It is possible for the firmware to contain a workaround for this erratum.
- */
-static void byt_idle_state_table_update(void)
-{
-	printk(PREFIX "byt_idle_state_table_update reached\n");
-	byt_cstates[1].disabled = 1;	/* C6N-BYT */
-	byt_cstates[2].disabled = 1;	/* C6S-BYT */
-}
-/*
  * sklh_idle_state_table_update(void)
  *
  * On SKL-H (model 0x5e) disable C8 and C9 if:
@@ -1339,11 +1311,6 @@ static void intel_idle_state_table_update(void)
 	case INTEL_FAM6_ATOM_GOLDMONT:
 		bxt_idle_state_table_update();
 		break;
-	case INTEL_FAM6_ATOM_SILVERMONT1: /* BYT */
-                printk(PREFIX "intel_idle_state_table_update BYT 0x37 reached\n");
-                byt_idle_state_table_update();
-                break;
-
 	case INTEL_FAM6_SKYLAKE_DESKTOP:
 		sklh_idle_state_table_update();
 		break;

@@ -74,7 +74,7 @@ _OUTSRC_FILES += \
 				hal/HalBtc8723b2Ant.o
 
 ########### HAL_RTL8723B #################################
-MODULE_NAME = r8723bs
+MODULE_NAME = 8723bs
 
 _HAL_INTFS_FILES += hal/HalPwrSeqCmd.o \
 					hal/Hal8723BPwrSeq.o

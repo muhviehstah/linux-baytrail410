@@ -1846,6 +1846,9 @@ static void sdhci_enable_sdio_irq(struct mmc_host *mmc, int enable)
 	if (enable)
 		sdhci_runtime_pm_get(host);
 
+	if (enable)
+		pm_runtime_get_noresume(host->mmc->parent);
+
 	spin_lock_irqsave(&host->lock, flags);
 	if (enable)
 		host->flags |= SDHCI_SDIO_IRQ_ENABLED;
@@ -2306,6 +2309,9 @@ static void sdhci_card_event(struct mmc_host *mmc)
 	}
 
 	spin_unlock_irqrestore(&host->lock, flags);
+
+	if (!enable)
+		pm_runtime_put_noidle(host->mmc->parent);
 }
 
 static const struct mmc_host_ops sdhci_ops = {
